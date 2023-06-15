@@ -31,3 +31,8 @@ img {
     font-size: 0.8rem;
     padding: 2.5rem 0;
 }
+
+.carousel-item img {
+    height: 600px;
+    object-fit: cover;
+}
