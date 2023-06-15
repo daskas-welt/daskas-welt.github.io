@@ -33,6 +33,6 @@ img {
 }
 
 .carousel-item img {
-    height: 600px;
+    height: 400px;
     object-fit: cover;
 }
