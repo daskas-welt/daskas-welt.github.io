@@ -1,12 +1,13 @@
 html,
 body {
     height: 100%;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 95%
+    font-family: "Roboto Mono", monospace;
+    font-size: 95%;
 }
 
 img {
     max-width: 100%;
+    height: auto;
 }
 
 .section-content {
@@ -14,13 +15,13 @@ img {
 }
 
 #about {
-    background: url('img/andreas_daskalopoulos.jpg') center center no-repeat;
+    background: url("img/andreas_daskalopoulos.jpg") center center no-repeat;
     background-size: cover;
     color: white;
 }
 
 .about-text {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     color: white;
     padding: 1.875rem;
 }
@@ -30,9 +31,4 @@ img {
     color: white;
     font-size: 0.8rem;
     padding: 2.5rem 0;
-}
-
-.carousel-item img {
-    height: 400px;
-    object-fit: cover;
 }
