@@ -32,3 +32,8 @@ img {
     font-size: 0.8rem;
     padding: 2.5rem 0;
 }
+
+.card-link.mt-3 {
+    display: inline-block;
+    margin-top: 1rem;
+}
