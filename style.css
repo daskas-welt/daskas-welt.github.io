@@ -75,21 +75,11 @@ img {
 }
 
 .card {
-    border-color: #adb5bd;
+    border-color: #c8c8c8;
+    border-radius: 0;
 }
 
 .card-link.mt-3 {
     display: inline-block;
     margin-top: 1rem;
-}
-
-.card-columns {
-    column-count: 3;
-    column-gap: 1.25rem;
-}
-
-.card-columns .card {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 1.25rem;
 }
