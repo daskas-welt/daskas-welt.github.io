@@ -1,8 +1,22 @@
 html,
 body {
     height: 100%;
-    font-family: "Roboto Mono", monospace;
+    font-family: "IBM Plex Mono", monospace;
     font-size: 95%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+}
+
+h5,
+h6 {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
 }
 
 img {
@@ -11,29 +25,71 @@ img {
 }
 
 .section-content {
-    padding: 5rem 0;
+    padding: 1.5rem 0;
+}
+
+#header {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 1.25rem 0;
+}
+
+#header h2 {
+    color: #f8f8f2;
+    margin-bottom: 0.25rem;
+}
+
+#header h4 {
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 0;
 }
 
 #about {
     background: url("img/andreas_daskalopoulos.jpg") center center no-repeat;
     background-size: cover;
     color: white;
+    padding: 2rem 0;
 }
 
 .about-text {
     background: rgba(0, 0, 0, 0.2);
     color: white;
-    padding: 1.875rem;
+    padding: 3rem;
 }
 
 #footer-main {
     background: #222;
     color: white;
     font-size: 0.8rem;
-    padding: 2.5rem 0;
+    padding: 0.75rem 0;
+}
+
+#footer-main a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+#footer-main a:hover {
+    color: white;
+}
+
+.card {
+    border-color: #adb5bd;
 }
 
 .card-link.mt-3 {
     display: inline-block;
     margin-top: 1rem;
+}
+
+.card-columns {
+    column-count: 3;
+    column-gap: 1.25rem;
+}
+
+.card-columns .card {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1.25rem;
 }
