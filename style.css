@@ -77,6 +77,12 @@ img {
 .card {
     border-color: #c8c8c8;
     border-radius: 0;
+    --bs-card-border-radius: 0;
+    --bs-card-inner-border-radius: 0;
+}
+
+.card-img-top {
+    border-radius: 0;
 }
 
 .card-link.mt-3 {
