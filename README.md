@@ -7,6 +7,4 @@ This is the personal website of Andreas Daskalopoulos, a senior software enginee
 ## Technologies Used
 
 - HTML5, CSS3
-- [Bootstrap 4](https://getbootstrap.com/)
-- Google Fonts (Roboto)
-- Custom styles in `style.css`
+- [Bootstrap 5](https://getbootstrap.com/)
