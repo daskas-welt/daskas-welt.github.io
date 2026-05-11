@@ -1,22 +1,36 @@
 html,
 body {
     height: 100%;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Inter", sans-serif;
     font-size: 95%;
+    font-weight: 400;
 }
 
-h1,
-h2,
-h3,
-h4 {
-    font-family: "IBM Plex Mono", monospace;
+h1 {
+    font-family: "Inter", sans-serif;
     font-weight: 700;
 }
 
-h5,
-h6 {
-    font-family: "IBM Plex Mono", monospace;
+h2,
+h3 {
+    font-family: "Inter", sans-serif;
     font-weight: 600;
+}
+
+h4,
+h5 {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.3rem;
+}
+
+h6 {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
 }
 
 img {
