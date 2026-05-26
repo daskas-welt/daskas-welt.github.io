@@ -1,36 +1,8 @@
 html,
 body {
     height: 100%;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto Mono", monospace;
     font-size: 95%;
-    font-weight: 400;
-}
-
-h1 {
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
-}
-
-h2,
-h3 {
-    font-family: "Inter", sans-serif;
-    font-weight: 600;
-}
-
-h4,
-h5 {
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-}
-
-h5 {
-    font-size: 1.3rem;
-}
-
-h6 {
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-size: 1.1rem;
 }
 
 img {
@@ -39,66 +11,26 @@ img {
 }
 
 .section-content {
-    padding: 1.5rem 0;
-}
-
-#header {
-    background-color: #1e1e1e;
-    color: white;
-    padding: 1.25rem 0;
-}
-
-#header h2 {
-    color: #f8f8f2;
-    margin-bottom: 0.25rem;
-}
-
-#header h4 {
-    color: #888;
-    font-size: 0.95rem;
-    margin-bottom: 0;
+    padding: 5rem 0;
 }
 
 #about {
     background: url("img/andreas_daskalopoulos.jpg") center center no-repeat;
     background-size: cover;
     color: white;
-    padding: 2rem 0;
 }
 
 .about-text {
     background: rgba(0, 0, 0, 0.2);
     color: white;
-    padding: 3rem;
+    padding: 1.875rem;
 }
 
 #footer-main {
     background: #222;
     color: white;
     font-size: 0.8rem;
-    padding: 0.75rem 0;
-}
-
-#footer-main a {
-    color: #aaa;
-    text-decoration: none;
-}
-
-#footer-main a:hover {
-    color: white;
-}
-
-.card {
-    border-color: #c8c8c8;
-    border-radius: 0;
-}
-
-.card-columns .card {
-    border-radius: 0;
-}
-
-.card-img-top {
-    border-radius: 0;
+    padding: 2.5rem 0;
 }
 
 .card-link.mt-3 {
