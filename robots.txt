@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daskas-welt.github.io/sitemap.xml
