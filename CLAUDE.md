@@ -4,9 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build and Development Commands
 
-This is a static website. No build step is required.
-
-- Formatting: `npx prettier --write .`
+This is a static website. No build step is required. No formatter or build tooling is used; code is edited by hand.
 
 ## Architecture and Structure
 
