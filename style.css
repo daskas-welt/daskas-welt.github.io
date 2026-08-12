@@ -14,6 +14,73 @@ img {
     padding: 5rem 0;
 }
 
+#header {
+    border-bottom: 1px dashed #ccc;
+}
+
+#header h1 {
+    font-size: 2rem;
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.header-tagline {
+    font-size: 1rem;
+    color: #9ecb8d;
+    letter-spacing: 0.02em;
+    background: #1e1e1e;
+    padding: 0.4rem 0.75rem;
+    border-radius: 3px;
+    display: inline-block;
+    box-shadow: inset 0 0 0 1px #333;
+}
+
+.header-tagline::before {
+    content: "daskas@welt:~$";
+    color: #e0e0e0;
+    letter-spacing: 0;
+    margin-right: 0.5rem;
+}
+
+.header-tagline::after {
+    content: "\258A";
+    color: #9ecb8d;
+    animation: blink 1s step-end infinite;
+    margin-left: 0.2rem;
+}
+
+@media (max-width: 576px) {
+    #header h1 {
+        font-size: 1.25rem;
+        overflow-wrap: anywhere;
+    }
+
+    .header-tagline {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+#header .section-content {
+    padding: 2rem 0;
+}
+
+#projects .section-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+#news .section-content {
+    padding-top: 0;
+}
+
 #about {
     background: url("img/andreas_daskalopoulos.jpg") center center no-repeat;
     background-size: cover;
@@ -23,17 +90,154 @@ img {
 .about-text {
     background: rgba(0, 0, 0, 0.2);
     color: white;
-    padding: 1.875rem;
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.about-social {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+#about .section-content {
+    padding: 2rem 0;
+}
+
+.about-social a {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.about-social a svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.about-social a::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.about-social a:hover::after {
+    opacity: 1;
+}
+
+.about-social a:hover svg {
+    transform: translateY(-2px) scale(1.15);
+}
+
+.about-social a.li-icon:hover svg {
+    fill: #0a66c2;
+}
+
+.about-social a.gh-icon:hover svg {
+    fill: #f0f6fc;
 }
 
 #footer-main {
     background: #222;
     color: white;
     font-size: 0.8rem;
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card-link.mt-3 {
+#footer-main h6 {
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+#footer-main p {
+    margin-bottom: 1rem;
+}
+
+#footer-main a {
+    color: #ccc;
+    transition: color 0.2s ease;
+}
+
+#footer-main a:hover,
+#footer-main a:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+#footer-main ul li {
+    margin-bottom: 0.4rem;
+}
+
+#footer-main .footer-copyright {
+    color: #8a8a8a;
+    margin-top: 2rem;
+}
+
+#footer-main .back-to-top {
+    color: #8a8a8a;
+}
+
+#footer-main .footer-social a {
+    position: relative;
     display: inline-block;
-    margin-top: 1rem;
+    vertical-align: middle;
+}
+
+#footer-main .footer-social a svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+#footer-main .footer-social a::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+#footer-main .footer-social a:hover::after {
+    opacity: 1;
+}
+
+#footer-main .footer-social a:hover svg {
+    transform: translateY(-2px) scale(1.15);
+}
+
+#footer-main .footer-social a.li-icon:hover svg {
+    fill: #0a66c2;
+}
+
+#footer-main .footer-social a.gh-icon:hover svg {
+    fill: #f0f6fc;
+}
+
+#footer-main .footer-social a.mail-icon:hover svg {
+    fill: #ffb74d;
 }
