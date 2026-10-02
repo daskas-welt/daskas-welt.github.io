@@ -77,6 +77,11 @@ img {
   padding-bottom: 2rem;
 }
 
+#sponsor .section-content {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 #news .section-content {
   padding-top: 0;
 }
