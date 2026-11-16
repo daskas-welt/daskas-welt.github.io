@@ -16,9 +16,8 @@ Static single-page personal site (GitHub Pages, repo `daskas-welt.github.io`). E
 - Card images may be local (`img/filename.jpg`) or hotlinked from external CDNs (e.g. Amazon media, publisher sites) — both patterns exist.
 - Image filenames in `img/` include Greek titles, camera names (`DSCF*.JPG`, `PXL_*.jpg`), and spaces — preserve exact names and paths.
 - The `#gallery` carousel section in `index.html` is commented out (with mismatched/broken ids) — dead code, not live content.
-- `.claude/skills/create-post/SKILL.md` is outdated (references Bootstrap 5 `row gx-3` wrappers and a fixed card template). Follow `index.html` markup, not the skill.
 
 ## Content conventions
-- Keep SEO/social meta (`og:*`, canonical, JSON-LD Person) and `sitemap.xml` `<lastmod>` in sync on significant changes.
+- Keep SEO/social meta (`og:*`, canonical, JSON-LD Person) and `sitemap.xml` `<lastmod>` in sync on significant changes (bump `<lastmod>` to today's date when adding a post).
 - Prefer `https://` for external links; only SVG `xmlns` legitimately uses `http://`.
 - Provide image `alt` text. No secrets/env vars used.
