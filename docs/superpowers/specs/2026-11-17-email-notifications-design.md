@@ -103,7 +103,7 @@ sends nothing. To deliberately re-send a card, delete its id from
 One message per card, sent oldest first so a burst arrives in posting
 order.
 
-- Subject: `Booze that matters from https://daskas-welt.github.io/: <title>`.
+- Subject: `Από το daskas-welt.github.io: <title>`.
 - Body: title, subtitle or first paragraph, image if the card has one,
   and a link to `https://daskas-welt.github.io/#<id>`.
 - Multipart: plain text plus the same content as simple HTML.

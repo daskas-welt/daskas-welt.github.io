@@ -44,7 +44,7 @@ test("buildMessage names the post in the subject and links to its id", () => {
   const message = buildMessage(c("red-rooms", { title: "Red Rooms" }));
   assert.equal(
     message.subject,
-    "Booze that matters from https://daskas-welt.github.io/: Red Rooms",
+    "Από το daskas-welt.github.io: Red Rooms",
   );
   assert.match(message.text, new RegExp(`${SITE}#red-rooms`));
   assert.match(

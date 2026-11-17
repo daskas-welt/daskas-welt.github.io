@@ -2,6 +2,9 @@
 
 import { SITE } from "./cards.mjs";
 
+// The subject names the site without the scheme or trailing slash.
+const DOMAIN = new URL(SITE).host;
+
 // Cards that have never been handled: stamped with an id, not quiet, and
 // absent from the recorded state. Document order, so a burst arrives in
 // posting order.
@@ -54,7 +57,7 @@ export function buildMessage(card) {
     .join("\n");
 
   return {
-    subject: `Booze that matters from ${SITE}: ${card.title}`,
+    subject: `Από το ${DOMAIN}: ${card.title}`,
     text,
     html,
   };
