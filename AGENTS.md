@@ -24,8 +24,7 @@ Static single-page site for GitHub Pages (repo `daskas-welt.github.io`). No buil
 
 ## Feed and ids
 - A slug must match in three places: the card's `id`, `<link>https://daskas-welt.github.io/#slug</link>`, and `<guid>.../post/slug</guid>`. Renaming the `id` without updating the feed breaks the link.
-- `feed.xml` is hand-edited: copy a neighbouring `<item>` instead of writing XML from scratch. Only newer items carry `<pubDate>`; card `data-date` attributes are leftovers with no effect.
-- `docs/superpowers/` holds old plans and specs, some for features that no longer exist (the email notifier). Trust the code.
+- `feed.xml` is hand-edited: copy a neighbouring `<item>` instead of writing XML from scratch. Only newer items carry `<pubDate>`.
 
 ## Conventions
 - Keep `og:*`, the canonical link, and the JSON-LD Person block in sync.
