@@ -53,5 +53,9 @@ export function buildMessage(card) {
     .filter(Boolean)
     .join("\n");
 
-  return { subject: `New on Booze that matters: ${card.title}`, text, html };
+  return {
+    subject: `Booze that matters from ${SITE}: ${card.title}`,
+    text,
+    html,
+  };
 }

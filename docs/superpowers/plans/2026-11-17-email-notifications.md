@@ -248,7 +248,10 @@ test("nextState unions page ids with prior state, sorted", () => {
 
 test("buildMessage names the post in the subject and links to its id", () => {
   const message = buildMessage(c("red-rooms", { title: "Red Rooms" }));
-  assert.equal(message.subject, "New on Booze that matters: Red Rooms");
+  assert.equal(
+    message.subject,
+    "Booze that matters from https://daskas-welt.github.io/: Red Rooms",
+  );
   assert.match(message.text, new RegExp(`${SITE}#red-rooms`));
   assert.match(message.html, /<a href="https:\/\/daskas-welt\.github\.io\/#red-rooms">/);
 });
@@ -291,7 +294,7 @@ Expected: FAIL — module not found.
 
 - `pending`: `cards.filter((card) => card.id && card.notify !== false && !notified.includes(card.id))`.
 - `nextState`: `[...new Set([...notified, ...cards.map((card) => card.id).filter(Boolean)])].sort()`.
-- `buildMessage`: subject exactly `New on Booze that matters: ${title}`; the link is `${SITE}#${card.id}`; body line is `subtitle || paragraphs[0] || ""`. `text` is title, blank line, body line, blank line, image URL if any, blank line, link. `html` is `<h2>` + escaped title + `</h2>`, `<p>` + escaped body, `<img src="…" alt="…">` when present, `<p><a href="…">Read the post</a></p>`. Include a local `escapeHtml` replacing `& < > "`.
+- `buildMessage`: subject exactly `Booze that matters from ${SITE}: ${title}`; the link is `${SITE}#${card.id}`; body line is `subtitle || paragraphs[0] || ""`. `text` is title, blank line, body line, blank line, image URL if any, blank line, link. `html` is `<h2>` + escaped title + `</h2>`, `<p>` + escaped body, `<img src="…" alt="…">` when present, `<p><a href="…">Read the post</a></p>`. Include a local `escapeHtml` replacing `& < > "`.
 
 - [ ] **Step 4: Run the tests to verify they pass**
 
@@ -345,7 +348,7 @@ Missing required env vars exit 1 with a message naming the variable.
 - [ ] **Step 3: Verify the dry run locally**
 
 Run: `node scripts/notify.mjs --dry-run`
-Expected: one `New on Booze that matters: …` line per stamped card (currently all 20), no network calls, exit 0.
+Expected: one `Booze that matters from https://daskas-welt.github.io/: …` line per stamped card (currently all 20), no network calls, exit 0.
 
 Run: `node scripts/notify.mjs --seed --dry-run`
 Expected: a JSON array of the same 20 ids, no network calls.
