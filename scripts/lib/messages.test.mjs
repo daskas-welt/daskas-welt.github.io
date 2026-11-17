@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pending, nextState, buildMessage } from "./messages.mjs";
+import { pending, nextState, handled, buildMessage } from "./messages.mjs";
 import { SITE } from "./cards.mjs";
 
 const c = (id, extra = {}) => ({
@@ -77,12 +77,22 @@ test("buildMessage escapes card text", () => {
 
 test("a failed send stays pending while quiet and sent cards do not", () => {
   const cards = [c("sent"), c("failed"), c("quiet", { notify: false })];
-  const handled = cards.filter(
-    (card) => card.notify === false || card.id === "sent",
+  const handledCards = handled(cards, ["sent"]);
+  assert.deepEqual(
+    handledCards.map((card) => card.id),
+    ["sent", "quiet"],
   );
-  const state = nextState(["old"], handled);
+  const state = nextState(["old"], handledCards);
   assert.deepEqual(
     pending(cards, state).map((card) => card.id),
     ["failed"],
+  );
+});
+
+test("handled records quiet cards even when nothing was sent", () => {
+  const cards = [c("quiet", { notify: false }), c("loud")];
+  assert.deepEqual(
+    handled(cards, []).map((card) => card.id),
+    ["quiet"],
   );
 });

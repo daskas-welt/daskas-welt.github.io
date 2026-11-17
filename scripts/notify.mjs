@@ -6,15 +6,15 @@
 // branch so main never carries bot commits. A card is new when it has an id
 // and is absent from that list; edits to existing cards therefore send
 // nothing. Cards marked data-notify="false" are recorded as handled without
-// being sent.
+// being sent. If no state file exists yet, the current page is adopted without
+// sending anything.
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import nodemailer from "nodemailer";
-
 import { readCards } from "./lib/cards.mjs";
+import { deliver } from "./lib/deliver.mjs";
 import { buildMessage, nextState, pending } from "./lib/messages.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -45,20 +45,23 @@ function githubHeaders() {
 }
 
 async function readState() {
-  if (dryRun) return { ids: [], sha: null };
+  const canRead = Boolean(
+    process.env.GITHUB_TOKEN && process.env.GITHUB_REPOSITORY,
+  );
+  if (dryRun && !canRead) return { ids: [], sha: null, found: false };
 
   const response = await fetch(
     repoUrl(`/contents/${STATE_FILE}?ref=${STATE_BRANCH}`),
     { headers: githubHeaders() },
   );
-  if (response.status === 404) return { ids: [], sha: null };
+  if (response.status === 404) return { ids: [], sha: null, found: false };
   if (!response.ok) {
     throw new Error(`Reading ${STATE_FILE} failed: ${response.status}`);
   }
 
   const body = await response.json();
   const ids = JSON.parse(Buffer.from(body.content, "base64").toString("utf8"));
-  return { ids, sha: body.sha };
+  return { ids, sha: body.sha, found: true };
 }
 
 async function ensureStateBranch() {
@@ -77,7 +80,6 @@ async function ensureStateBranch() {
 }
 
 async function writeState(ids, sha) {
-  if (dryRun) return;
   if (!sha) await ensureStateBranch();
 
   const response = await fetch(repoUrl(`/contents/${STATE_FILE}`), {
@@ -97,7 +99,10 @@ async function writeState(ids, sha) {
   }
 }
 
-function transport() {
+// Loaded only when a message is actually sent, so --dry-run and --seed work
+// without installing dependencies.
+async function transport() {
+  const { default: nodemailer } = await import("nodemailer");
   return nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -119,7 +124,7 @@ function recipients() {
 async function main() {
   const source = fs.readFileSync(HTML_PATH, "utf8");
   const cards = readCards(source);
-  const { ids: state, sha } = await readState();
+  const { ids: state, sha, found } = await readState();
 
   if (seed) {
     const ids = nextState([], cards);
@@ -132,48 +137,46 @@ async function main() {
     return;
   }
 
-  const toSend = pending(cards, state);
-  if (!toSend.length) {
-    console.log("no new posts");
-    return;
-  }
-
   if (dryRun) {
+    if (!found) {
+      const count = nextState([], cards).length;
+      console.log(`no state yet: would seed ${count} ids; nothing sent`);
+      return;
+    }
+    const toSend = pending(cards, state);
+    if (!toSend.length) console.log("no new posts");
     for (const card of toSend) console.log(buildMessage(card).subject);
     return;
   }
 
-  const from = env("GMAIL_USER");
-  const to = recipients();
-  const mail = transport();
-  const sent = [];
-
-  for (const card of toSend) {
-    const message = buildMessage(card);
-    try {
-      await mail.sendMail({
-        from,
-        to: from,
-        bcc: to,
+  let mailer;
+  const result = await deliver({
+    cards,
+    state,
+    sha,
+    send: async (message) => {
+      mailer ??= await transport();
+      await mailer.sendMail({
+        from: env("GMAIL_USER"),
+        to: env("GMAIL_USER"),
+        bcc: recipients(),
         subject: message.subject,
         text: message.text,
         html: message.html,
       });
-      sent.push(card.id);
-      console.log(`sent ${card.id}`);
-    } catch (error) {
-      console.error(`failed ${card.id}: ${error.message}`);
-      process.exitCode = 1;
-      break;
-    }
-  }
+      console.log(`sent ${message.subject}`);
+    },
+    write: (ids) => writeState(ids, sha),
+  });
 
-  // Quiet cards count as handled; a card whose send failed is left out so the
-  // next push retries it.
-  const handled = cards.filter(
-    (card) => card.notify === false || sent.includes(card.id),
-  );
-  await writeState(nextState(state, handled), sha);
+  if (result.bootstrapped !== null) {
+    console.log(`seeded ${result.bootstrapped} ids; nothing sent`);
+  } else if (result.failed) {
+    console.error(`failed ${result.failed}`);
+    process.exitCode = 1;
+  } else if (!result.sent.length) {
+    console.log("no new posts");
+  }
 }
 
 main().catch((error) => {

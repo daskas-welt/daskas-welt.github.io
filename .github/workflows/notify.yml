@@ -17,11 +17,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: npm ci
+      - run: npm test
       - run: node scripts/generate-feed.mjs
+      - name: Check card ids are committed
+        run: |
+          if ! git diff --quiet -- index.html; then
+            echo "::error::index.html has unstamped cards; run node scripts/generate-feed.mjs and commit the result"
+            exit 1
+          fi
       - run: node scripts/notify.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

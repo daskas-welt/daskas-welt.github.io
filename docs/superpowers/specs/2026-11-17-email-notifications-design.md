@@ -71,9 +71,13 @@ Steps:
    - Compares that set with `notified.json`.
    - Cards absent from both `notified.json` and `data-notify="false"` are
      the new ones.
-   - No new cards → exit 0, no email.
+   - No new cards → the quiet ones on the page are recorded, and the run
+     exits without email.
    - Otherwise send one message per new card, then write `notified.json`.
-4. State is written with the GitHub contents API to a separate
+4. If `notified.json` does not exist yet, the run records every id on the
+   page and sends nothing. A deployment therefore adopts the back
+   catalogue instead of mailing it.
+5. State is written with the GitHub contents API to a separate
    `automation` branch. `main` therefore never carries bot commits and a
    local clone never drifts.
 
@@ -116,15 +120,17 @@ Secrets: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `FRIENDS_EMAILS`
 ### Failure behaviour
 
 Send each message, then write state once with every id that was
-successfully sent. If one send fails, the run fails after recording the
-earlier ones; only the failed card is retried by the next push. A
-duplicate is preferred over a silent miss.
+successfully sent, plus every quiet card on the page. If one send fails,
+the run fails after recording the earlier ones; only the failed card is
+retried by the next push. A duplicate is preferred over a silent miss.
+A push that contains only quiet cards still writes their ids.
 
 ### Bootstrap
 
-`notified.json` starts as the ids of the current twenty cards, written
-with `node scripts/notify.mjs --seed`, so the first real push mails only
-what is genuinely new. Without this, deploying the feature would mail the
+A missing `notified.json` is handled in code: the run writes the ids of the
+current twenty cards and sends nothing. `node scripts/notify.mjs --seed`
+does the same thing on demand, for repairing a state file that was lost or
+deliberately reset. Without this, deploying the feature would mail the
 whole back catalogue.
 
 ## Constraints
@@ -159,13 +165,18 @@ whole back catalogue.
 
 ## Verification
 
-No automated tests exist in this repo; proof is manual.
+No automated tests existed in this repo before this change; the parser,
+selection, and delivery rules now have `node:test` coverage run by
+`npm test` (and by CI). The page itself is still verified manually.
 
-1. `node scripts/generate-feed.mjs` on a copy of the repo produces the
-   same `feed.xml` as before the refactor (byte compare).
-2. `node scripts/notify.mjs --dry-run` prints one message per new card for
-   a deliberately unstamped card and prints nothing after `--seed`.
-3. End to end: set `FRIENDS_EMAILS` to the owner's own address, add two
+1. `npm test` — parser, selection, and delivery rules, including quiet
+   cards and partial failures.
+2. `node scripts/notify.mjs --dry-run` reads state read-only when
+   credentials are present and prints what would be sent, or
+   `no new posts`; without credentials it reports that it would seed.
+3. `node scripts/generate-feed.mjs` leaves `feed.xml` unchanged apart from
+   `lastBuildDate`.
+4. End to end: set `FRIENDS_EMAILS` to the owner's own address, add two
    throwaway cards in one push, confirm two emails arrive; then edit both,
    push, confirm nothing more is sent.
 

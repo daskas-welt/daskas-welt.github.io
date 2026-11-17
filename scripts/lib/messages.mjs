@@ -11,6 +11,15 @@ export function pending(cards, notified) {
   );
 }
 
+// Cards whose ids should be recorded as handled: quiet ones, which are never
+// emailed, and the ones just sent. A card whose send failed is left out so a
+// later run retries it.
+export function handled(cards, sentIds) {
+  return cards.filter(
+    (card) => card.notify === false || sentIds.includes(card.id),
+  );
+}
+
 // Prior state plus every id now on the page, so quiet cards count as handled
 // and removed cards are remembered.
 export function nextState(notified, cards) {
