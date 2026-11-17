@@ -14,15 +14,6 @@ export function pending(cards, notified) {
   );
 }
 
-// Cards whose ids should be recorded as handled: quiet ones, which are never
-// emailed, and the ones just sent. A card whose send failed is left out so a
-// later run retries it.
-export function handled(cards, sentIds) {
-  return cards.filter(
-    (card) => card.notify === false || sentIds.includes(card.id),
-  );
-}
-
 // Prior state plus every id now on the page, so quiet cards count as handled
 // and removed cards are remembered.
 export function nextState(notified, cards) {
@@ -41,15 +32,17 @@ function escapeHtml(value) {
 
 export function buildMessage(card) {
   const link = `${SITE}#${card.id}`;
-  const body = card.subtitle || card.paragraphs[0] || "";
+  const paragraphs = [card.subtitle, ...card.paragraphs].filter(Boolean);
 
-  const text = [card.title, body, card.image, link].filter(Boolean).join("\n\n");
+  const text = [card.title, ...paragraphs, card.image, link]
+    .filter(Boolean)
+    .join("\n\n");
 
   const html = [
     `<h2>${escapeHtml(card.title)}</h2>`,
-    body ? `<p>${escapeHtml(body)}</p>` : "",
+    ...paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`),
     card.image
-      ? `<p><img src="${escapeHtml(card.image)}" alt="${escapeHtml(card.title)}" /></p>`
+      ? `<p><img src="${escapeHtml(card.image)}" alt="${escapeHtml(card.title)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;" /></p>`
       : "",
     `<p><a href="${escapeHtml(link)}">Read the post</a></p>`,
   ]
