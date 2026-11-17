@@ -54,7 +54,7 @@ survive edits without producing extra email.
 
 ## How it works
 
-Workflow `.github/workflows/notify.yml`:
+Workflow `.github/workflows/email-new-posts.yml`:
 
 - Trigger: `push` to `main`, whatever the push touched — the first run
   after deploy bootstraps state, and later runs exit quietly unless a card
@@ -156,7 +156,7 @@ whole back catalogue.
 
 ## Files
 
-- `.github/workflows/notify.yml` — trigger, concurrency, steps, secrets.
+- `.github/workflows/email-new-posts.yml` — trigger, concurrency, steps, secrets.
 - `scripts/notify.mjs` — card comparison, message building, sending, state.
 - `scripts/lib/cards.mjs` — card parsing lifted out of
   `generate-feed.mjs`, imported by both.

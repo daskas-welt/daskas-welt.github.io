@@ -1,4 +1,4 @@
-name: Email new posts
+name: email-new-posts
 
 on:
   push:
