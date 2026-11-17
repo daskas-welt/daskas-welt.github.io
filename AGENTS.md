@@ -1,25 +1,45 @@
 # AGENTS.md
 
-Static single-page personal site (GitHub Pages, repo `daskas-welt.github.io`). Everything lives in `index.html` (+ `style.css`). No build step, no JS framework, no backend. The only code is the Node scripts in `scripts/`.
+Static single-page personal site (GitHub Pages, repo `daskas-welt.github.io`). No build step, no framework, no backend. Content lives in `index.html` + `style.css`; the only code is the Node ESM scripts in `scripts/` (no dependencies except `nodemailer`).
 
-## Toolchain
-- Verification of the page is manual: serve the directory (e.g. `python3 -m http.server`) and check the rendered page. The scripts have tests: `npm test` runs `node --test` over `scripts/lib/` (no framework), and CI runs it before notifying. `node scripts/notify.mjs --dry-run` needs no install; an actual send needs `npm ci` (CI does this). No lint or typecheck.
-- Formatting is Prettier-style (2-space indent, ~80-col wrapping, e.g. `</a>` on its own line after wrapped link text). There is no Prettier config or dependency; either run Prettier defaults or match surrounding formatting exactly.
-- Deploy: push to `main`; GitHub Pages publishes automatically, and the email workflow runs on every push to `main`, sending only when a card is new.
+## Writing
+- The audience is primarily friends and the outside world, most of them reading on a phone. Write for someone curious about the place, not for a search engine.
+- Keep paragraphs to 2–4 sentences. The narrow card columns make long paragraphs hard to read.
+- Use active voice and everyday language; when a plain word and a fancy one both fit, use the plain one.
+- A post is not finished until the thumbnails and feed are regenerated (`python scripts/make-thumbs.py`, then `node scripts/generate-feed.mjs`) and `index.html`, `feed.xml`, and `img/thumbs/` are committed together.
 
-## Critical facts (verify before editing)
-- **Bootstrap 4.6.2** via jsDelivr CDN (CSS + `bootstrap.bundle.min.js`), NOT 5. `CLAUDE.md` wrongly says Bootstrap 5 — trust `index.html`.
-- Fonts: page loads `Roboto|Roboto Mono`; `style.css` sets `"Roboto Mono", monospace` globally. Keep both faces loaded (this mismatch caused a bug once).
-- `#news` (visible heading "Booze that matters!") uses Bootstrap 4 `.card-columns` (CSS multi-column). Cards are **direct children** of `.card-columns` — do **not** wrap them in `row > col-*` grids. Nested/wrapped cards broke rendering twice before.
-- New posts go at the **end** of `.card-columns` (newest card last).
-- Cards are heterogeneous: `<img>`, subtitle, text, and link blocks are all optional and appear in varying order. Copy the nearest existing card's markup, not a fixed template.
-- Card images may be local (`img/filename.jpg`) or hotlinked from external CDNs (e.g. Amazon media, publisher sites) — both patterns exist.
-- Image filenames in `img/` include Greek titles, camera names (`DSCF*.JPG`, `PXL_*.jpg`), and spaces — preserve exact names and paths.
-- `feed.xml` is **generated** from the last 20 cards by `node scripts/generate-feed.mjs` (zero dependencies). Never hand-edit it. The script also stamps `id` attributes on those cards so feed links jump to the right card. Adding a card means re-running it; add `data-date="YYYY-MM-DD"` to the card if you want a `<pubDate>`.
-- `notified.json` on the `automation` branch lists the card ids already emailed. The `email-new-posts` workflow (`.github/workflows/email-new-posts.yml`) runs on every push to `main` and emails **one message per new card**; card ids come from `generate-feed.mjs`, so run it before pushing a post (CI fails the run if `index.html` still has unstamped cards). If `notified.json` does not exist yet, the run records the current page ids and sends nothing, so deploying never mails the back catalogue. Add `data-notify="false"` to a card's outer `<div>` to publish it without email — that is permanent once recorded, so delete the id from `notified.json` to send it later. Email bodies come from `scripts/notify.mjs` and `scripts/lib/messages.mjs`.
-- The `#gallery` carousel section in `index.html` is commented out (with mismatched/broken ids) — dead code, not live content.
+## Commands
+- Test: `npm test` (`node --test scripts/lib/`). Single file: `node --test scripts/lib/cards.test.mjs`.
+- Feed: `node scripts/generate-feed.mjs` — rewrites `feed.xml` and stamps missing card ids in `index.html`. Run it after adding/reordering cards and commit both files; CI fails if it leaves `index.html` modified.
+- Thumbnails: `python scripts/make-thumbs.py` (needs Pillow). Writes `img/thumbs/<name>.jpg` at 720px, caps JPEG originals over 2000px, and rewrites each card's `src` plus `loading`/`width`/`height`. Run it after adding a photo, before the feed step.
+- Email preview: `node scripts/notify.mjs --dry-run` (no install or GitHub creds; without creds it reports "no state yet"). `--seed` records the current ids without sending. Real sends need `npm ci` + Actions secrets and only happen in CI.
+- Verify the page by serving the directory (`python3 -m http.server`) and viewing it. No lint, typecheck, or formatter config.
+- Deploy: push to `main`. Pages publishes on its own; `.github/workflows/email-new-posts.yml` runs `npm test`, regenerates the feed, then emails new cards.
 
-## Content conventions
-- Keep SEO/social meta (`og:*`, canonical, JSON-LD Person) and `sitemap.xml` `<lastmod>` in sync on significant changes (bump `<lastmod>` to today's date when adding a post).
-- Prefer `https://` for external links; only SVG `xmlns` legitimately uses `http://`.
-- Provide image `alt` text. Secrets (`GMAIL_USER`, `GMAIL_APP_PASSWORD`, `FRIENDS_EMAILS`) live in the repo's Actions settings, never in the tree.
+## Editing `index.html`
+- Bootstrap **4.6.2** via jsDelivr (CSS + `bootstrap.bundle.min.js`), not 5. All custom CSS is in `style.css`.
+- Fonts: Google Fonts loads `Roboto|Roboto Mono`; `style.css` uses `"Roboto Mono", monospace` globally. Keep both faces in the URL (a missing face caused a bug once).
+- `#news` (heading "Booze that matters!") uses Bootstrap 4 `.card-columns` (CSS multi-column). Cards must be **direct children** of `<div class="card-columns">`; wrapping them in `row`/`col-*` broke rendering twice. The outer `row > col-sm-12` wrapper is fine.
+- The scripts locate a card with `/<div class="card"(?=[\s>])/`, so `class="card"` must be the exact and first attribute. `class="card mt-3"` or `id` before `class` silently drops the card from the feed and email. Same for the title: keep `<h5 class="card-title">` exact, since the title becomes the feed slug.
+- New posts go at the **end** (newest last). `generate-feed.mjs` takes the last 20 cards and lists them newest first.
+- Cards are heterogeneous: image, subtitle, paragraphs, and links are optional and appear in varying order. Copy the nearest existing card instead of a fixed template.
+- Image pattern: `<a href="img/x.jpg"><img class="card-img-top" src="img/thumbs/x.jpg" alt="..."></a>`. The `href` is the full-size original, the `src` is its 720px thumbnail. Some cards hotlink Amazon/publisher URLs instead; both are fine.
+- Don't hand-write thumbnails or `loading`/`width`/`height`: drop the photo in `img/` and run `python scripts/make-thumbs.py`, which writes the thumbnail and rewrites the card for you.
+- Preserve image filenames exactly (Greek titles, `DSCF*.JPG`, `PXL_*`, spaces). JPEG originals are capped at 2000px on the longest edge; thumbnails are 720px wide, ~40–90 KB.
+- `#gallery` is a commented-out carousel with broken ids — dead code, leave it alone.
+- `index.html` has mixed CRLF/LF endings. Don't normalize the file.
+
+## Feed, ids, and email
+- `feed.xml` is generated — never hand-edit. A card's `id` is its title slug (Greek transliterated), stamped once; the script never changes an existing id. **Renaming a title after it is stamped breaks the link**: the feed uses the new slug while the card keeps the old id. Keep titles stable after publishing, or update the id by hand.
+- CI regenerates `feed.xml` but never commits it, and only checks `index.html` for unstamped ids. A stale `feed.xml` therefore goes live unnoticed — commit the regenerated file yourself.
+- Add `data-date="YYYY-MM-DD"` to a card for a `<pubDate>`.
+- `notified.json` on the `automation` branch holds completed card ids plus per-recipient send attempts. Each new card is emailed to each friend once; attempts are recorded *before* sending, so failures are never retried automatically. If the state file is missing, the current page is adopted and nothing is sent.
+- `data-notify="false"` on the card div publishes it without email, and quiet cards are recorded as handled on every run. To send it later, remove the attribute *and* delete its id from `notified.json`.
+- Recipient ids are hashed with `GMAIL_APP_PASSWORD`, so rotating the password while attempts are pending makes `loadState` throw.
+- Secrets (`GMAIL_USER`, `GMAIL_APP_PASSWORD`, `FRIENDS_EMAILS`) live in repo Actions settings, never in the tree.
+
+## Conventions
+- Keep SEO/social meta (`og:*`, canonical, JSON-LD Person) in sync, and bump `sitemap.xml` `<lastmod>` to today's date when adding a post.
+- Formatting is Prettier defaults (2-space indent, ~80-col wrapping, one attribute per line in wrapped tags). There is no Prettier config; match the surrounding markup.
+- Prefer `https://` for external links; only SVG `xmlns` and the RSS/sitemap namespaces legitimately use `http://`.
+- Provide `alt` text on images.
