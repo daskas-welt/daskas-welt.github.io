@@ -5,13 +5,22 @@
     <link>https://daskas-welt.github.io/</link>
     <description>Places, books, films and things Andreas Daskalopoulos finds worth sharing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Nov 2026 12:58:47 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 13:25:54 GMT</lastBuildDate>
     <atom:link href="https://daskas-welt.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://daskas-welt.github.io/img/header.jpeg</url>
       <title>Andreas Daskalopoulos — Booze that matters!</title>
       <link>https://daskas-welt.github.io/</link>
     </image>
+    <item>
+      <title>Πόρος</title>
+      <link>https://daskas-welt.github.io/#poros</link>
+      <guid isPermaLink="false">https://daskas-welt.github.io/post/poros</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Από το κατάστρωμα του φεριμπότ ο Πόρος φαίνεται ολόκληρος σαν αμφιθέατρο: ασπρισμένα σπίτια με κόκκινες στέγες, πεύκα ανάμεσά τους και, ψηλά στον λόφο, το ρολόι της πόλης. Το κανάλι που τον χωρίζει από την Πελοπόννησο είναι τόσο στενό που η διάσχιση κρατάει πέντε λεπτά.</p>
+<p><img src="https://daskas-welt.github.io/img/poros.JPG" alt="Πόρος" /></p>
+<p><a href="https://el.wikipedia.org/wiki/%CE%A0%CF%8C%CF%81%CE%BF%CF%82">Read more</a></p>]]></description>
+    </item>
     <item>
       <title>Red Rooms</title>
       <link>https://daskas-welt.github.io/#red-rooms</link>
@@ -171,14 +180,6 @@
       <description><![CDATA[<p><em>Lesser Cyclades</em></p>
 <p>Italida on Koufonisia is the kind of beach you stay at all day. Turquoise water, soft sand, and somehow still relaxed even when people show up.</p>
 <p><img src="https://daskas-welt.github.io/img/koufonisia_italida.jpg" alt="Italida, Koufonisia" /></p>]]></description>
-    </item>
-    <item>
-      <title>Stavros, Donousa</title>
-      <link>https://daskas-welt.github.io/#stavros-donousa</link>
-      <guid isPermaLink="false">https://daskas-welt.github.io/post/stavros-donousa</guid>
-      <description><![CDATA[<p><em>Main beach of Donousa</em></p>
-<p>Stavros is the main beach on Donousa, right in front of the village. Shallow water, a few tavernas nearby, and everything you need for a lazy day. Good for families or just doing nothing.</p>
-<p><img src="https://daskas-welt.github.io/img/donousa_stauros.jpg" alt="Stavros, Donousa" /></p>]]></description>
     </item>
   </channel>
 </rss>
