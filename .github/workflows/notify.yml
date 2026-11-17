@@ -1,0 +1,32 @@
+name: Email new posts
+
+on:
+  push:
+    branches: [main]
+    paths: ["index.html"]
+
+concurrency:
+  group: notify
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: node scripts/generate-feed.mjs
+      - run: node scripts/notify.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          FRIENDS_EMAILS: ${{ secrets.FRIENDS_EMAILS }}
