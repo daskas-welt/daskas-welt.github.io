@@ -15,6 +15,7 @@ Static single-page personal site (GitHub Pages, repo `daskas-welt.github.io`). E
 - Cards are heterogeneous: `<img>`, subtitle, text, and link blocks are all optional and appear in varying order. Copy the nearest existing card's markup, not a fixed template.
 - Card images may be local (`img/filename.jpg`) or hotlinked from external CDNs (e.g. Amazon media, publisher sites) — both patterns exist.
 - Image filenames in `img/` include Greek titles, camera names (`DSCF*.JPG`, `PXL_*.jpg`), and spaces — preserve exact names and paths.
+- `feed.xml` is **generated** from the last 20 cards by `node scripts/generate-feed.mjs` (zero dependencies). Never hand-edit it. The script also stamps `id` attributes on those cards so feed links jump to the right card. Adding a card means re-running it; add `data-date="YYYY-MM-DD"` to the card if you want a `<pubDate>`.
 - The `#gallery` carousel section in `index.html` is commented out (with mismatched/broken ids) — dead code, not live content.
 
 ## Content conventions
