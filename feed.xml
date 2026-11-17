@@ -5,13 +5,23 @@
     <link>https://daskas-welt.github.io/</link>
     <description>Places, books, films and things Andreas Daskalopoulos finds worth sharing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Nov 2026 13:25:54 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 14:58:09 GMT</lastBuildDate>
     <atom:link href="https://daskas-welt.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://daskas-welt.github.io/img/header.jpeg</url>
       <title>Andreas Daskalopoulos — Booze that matters!</title>
       <link>https://daskas-welt.github.io/</link>
     </image>
+    <item>
+      <title>Τζουμέρκα</title>
+      <link>https://daskas-welt.github.io/#tzoymerka</link>
+      <guid isPermaLink="false">https://daskas-welt.github.io/post/tzoymerka</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<p><em>Πράμαντα, Ήπειρος</em></p>
+<p>Για τη διαμονή μου στα Τζουμέρκα επέλεξα ως βάση τα Πράμαντα. Από την κεντρική πλατεία του χωριού, η θέα προς την κορυφή Στρογγούλα με υψόμετρο που αγγίζει τα 2.112 μέτρα, υψώνεται ακριβώς πίσω από τις στέγες των σπιτιών και κλέβει αμέσως τις εντυπώσεις. Το πλούσιο πράσινο του δάσους ντύνει τις χαμηλότερες πλαγιές, δίνοντας σταδιακά τη θέση του στον γυμνό βράχο της κορυφής.</p>
+<p><img src="https://daskas-welt.github.io/img/tzoumerka.jpg" alt="Τζουμέρκα" /></p>
+<p><a href="https://el.wikipedia.org/wiki/%CE%A4%CE%B6%CE%BF%CF%85%CE%BC%CE%AD%CF%81%CE%BA%CE%B1">Read more</a></p>]]></description>
+    </item>
     <item>
       <title>Πόρος</title>
       <link>https://daskas-welt.github.io/#poros</link>
@@ -172,14 +182,6 @@
 <p>Στο «Τι έμαθα περπατώντας στον κόσμο», η Λένα Διβάνη μάς προσφέρει ένα απολαυστικό ταξιδιωτικό ημερολόγιο γεμάτο εμπειρίες, ανθρώπους και μαθήματα ζωής από δεκάδες χώρες—από τη Βενεζουέλα και την Κούβα έως την Αιθιοπία και τη Νέα Ζηλανδία—δίνοντας φωνή στις πιο απρόβλεπτες, αστείες, συγκινητικές ή και σκοτεινές στιγμές που έζησε ως περιπατήτρια του κόσμου.</p>
 <p><img src="https://daskas-welt.github.io/img/ti_ematha_perpatontas_ston_kosmo.jpg" alt="Τι έμαθα περπατώντας στον κόσμο" /></p>
 <p><a href="https://www.kastaniotis.com/978-960-03-6278-7-c.html">Read more</a></p>]]></description>
-    </item>
-    <item>
-      <title>Italida, Koufonisia</title>
-      <link>https://daskas-welt.github.io/#italida-koufonisia</link>
-      <guid isPermaLink="false">https://daskas-welt.github.io/post/italida-koufonisia</guid>
-      <description><![CDATA[<p><em>Lesser Cyclades</em></p>
-<p>Italida on Koufonisia is the kind of beach you stay at all day. Turquoise water, soft sand, and somehow still relaxed even when people show up.</p>
-<p><img src="https://daskas-welt.github.io/img/koufonisia_italida.jpg" alt="Italida, Koufonisia" /></p>]]></description>
     </item>
   </channel>
 </rss>
