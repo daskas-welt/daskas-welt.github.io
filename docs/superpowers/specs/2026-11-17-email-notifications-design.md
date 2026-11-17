@@ -56,7 +56,9 @@ survive edits without producing extra email.
 
 Workflow `.github/workflows/notify.yml`:
 
-- Trigger: `push` to `main` with `paths: ["index.html"]`.
+- Trigger: `push` to `main`, whatever the push touched — the first run
+  after deploy bootstraps state, and later runs exit quietly unless a card
+  is new.
 - `concurrency` group with `cancel-in-progress: false`, so two quick
   pushes queue rather than race on the state file.
 - `permissions: contents: write` (state write only).

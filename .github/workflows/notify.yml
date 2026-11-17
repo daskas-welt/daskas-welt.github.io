@@ -3,7 +3,6 @@ name: Email new posts
 on:
   push:
     branches: [main]
-    paths: ["index.html"]
 
 concurrency:
   group: notify
