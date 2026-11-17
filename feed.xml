@@ -5,13 +5,22 @@
     <link>https://daskas-welt.github.io/</link>
     <description>Places, books, films and things Andreas Daskalopoulos finds worth sharing.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Nov 2026 14:58:09 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 17:21:06 GMT</lastBuildDate>
     <atom:link href="https://daskas-welt.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <image>
       <url>https://daskas-welt.github.io/img/header.jpeg</url>
       <title>Andreas Daskalopoulos — Booze that matters!</title>
       <link>https://daskas-welt.github.io/</link>
     </image>
+    <item>
+      <title>Ύδρα</title>
+      <link>https://daskas-welt.github.io/#ydra</link>
+      <guid isPermaLink="false">https://daskas-welt.github.io/post/ydra</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Η Ύδρα αναδεικνύει την ομορφιά της καλύτερα όταν την αντικρίζεις από τη θάλασσα, καθώς το γραφικό λιμάνι με τα αραγμένα καΐκια, τα αρχοντικά με τις κεραμιδένιες στέγες που πλαισιώνουν τον κόλπο και ο οικισμός που απλώνεται αμφιθεατρικά στην πλαγιά συνθέτουν μια ξεχωριστή εικόνα.</p>
+<p><img src="https://daskas-welt.github.io/img/hydra.JPG" alt="Ύδρα" /></p>
+<p><a href="https://el.wikipedia.org/wiki/%CE%8E%CE%B4%CF%81%CE%B1">Read more</a></p>]]></description>
+    </item>
     <item>
       <title>Τζουμέρκα</title>
       <link>https://daskas-welt.github.io/#tzoymerka</link>
@@ -173,15 +182,6 @@
 <p>* Linda Jaivin - Σύντομη ιστορία της Κίνας</p>
 <p>* Mark Galeotti - Μικρή ιστορία της Ρωσίας από τον Πούτιν</p>
 <p><img src="https://daskas-welt.github.io/img/USA.jpeg" alt="Ιστορία" /></p>]]></description>
-    </item>
-    <item>
-      <title>Τι έμαθα περπατώντας στον κόσμο</title>
-      <link>https://daskas-welt.github.io/#ti-ematha-perpatontas-ston-kosmo</link>
-      <guid isPermaLink="false">https://daskas-welt.github.io/post/ti-ematha-perpatontas-ston-kosmo</guid>
-      <description><![CDATA[<p><em>Λένα Διβάνη</em></p>
-<p>Στο «Τι έμαθα περπατώντας στον κόσμο», η Λένα Διβάνη μάς προσφέρει ένα απολαυστικό ταξιδιωτικό ημερολόγιο γεμάτο εμπειρίες, ανθρώπους και μαθήματα ζωής από δεκάδες χώρες—από τη Βενεζουέλα και την Κούβα έως την Αιθιοπία και τη Νέα Ζηλανδία—δίνοντας φωνή στις πιο απρόβλεπτες, αστείες, συγκινητικές ή και σκοτεινές στιγμές που έζησε ως περιπατήτρια του κόσμου.</p>
-<p><img src="https://daskas-welt.github.io/img/ti_ematha_perpatontas_ston_kosmo.jpg" alt="Τι έμαθα περπατώντας στον κόσμο" /></p>
-<p><a href="https://www.kastaniotis.com/978-960-03-6278-7-c.html">Read more</a></p>]]></description>
     </item>
   </channel>
 </rss>
