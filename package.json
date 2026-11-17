@@ -1,3 +1,11 @@
 {
-    "devDependencies": {}
+  "name": "daskas-welt-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test scripts/lib/cards.test.mjs scripts/lib/messages.test.mjs"
+  },
+  "dependencies": {
+    "nodemailer": "^7.0.13"
+  }
 }
